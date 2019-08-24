@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { Constants } from 'expo';
-import ClockComponent from './ClockComponent';
+import ClockComponent from './ClockComponent'
+
 
 export default class Counter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       count: 0,
-      countSeconds: 0,
-      countMinutes: this.props.timer,
-      tomatoes: 0,
+      countSeconds: 59,
+      countMinutes: this.props.timer-1,
+      tomatoes: this.props.tomatoes,
       test: 5,
     };
   }
@@ -24,7 +25,7 @@ export default class Counter extends React.Component {
   }
 
   increment = () => {
-    console.log(this.props.timer)
+    console.log(this.state.tomatoes)
     if (this.props.onStop === false){
       this.setState({
         count: this.state.count +1,
@@ -34,12 +35,16 @@ export default class Counter extends React.Component {
             ? this.state.countMinutes - 1
             : this.state.countMinutes,
         tomatoes:
-          this.state.countMinutes === 10
+          this.state.countMinutes === 0
             ? this.state.tomatoes + 1
             : this.state.tomatoes,
       });
     }
   };
+
+  vibrate = () => {
+
+  }
 
   render() {
     return (

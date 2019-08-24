@@ -21,6 +21,10 @@ export default class TimerPicker extends React.Component {
   render(){
       return(
         <View>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.text}>Set Timer:  </Text>
+          <Text style={styles.text}>Set Rest:</Text>
+        </View>
           <View style={styles.picker}>
             <Picker
               selectedValue={this.state.timer}
@@ -31,7 +35,7 @@ export default class TimerPicker extends React.Component {
               <Picker.Item label="25" value= "25" />
               <Picker.Item label="20" value= "20" />
               <Picker.Item label="15" value= "15" />
-              <Picker.Item label="10" value= "10" />
+              <Picker.Item label="10" value= "1" />
             </Picker>
             <Picker
               selectedValue={this.state.rest}
@@ -45,10 +49,6 @@ export default class TimerPicker extends React.Component {
               <Picker.Item label="3" value= "3" />
             </Picker>
           </View>
-          <View>
-            <Text>{this.state.timer}</Text>
-            <Text>{this.state.rest}</Text>
-          </View>
         </View>
     )
   }
@@ -56,8 +56,12 @@ export default class TimerPicker extends React.Component {
 
 const styles = StyleSheet.create({
   picker: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
    },
+  text: {
+    fontSize: 20,
+    flexDirection: 'row',
+
+  },
 })

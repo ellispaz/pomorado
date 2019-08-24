@@ -35,7 +35,8 @@ export default class App extends React.Component {
       <View style={styles.clockContainer}>
       {this.state.showCounter && <Counter onStop={this.state.stop}
                                           timer={this.props.timer}
-                                          rest={this.props.rest}/>}
+                                          rest={this.props.rest}
+                                          tomatoes={this.props.tomatoes}/>}
       {!this.state.showCounter && <ZeroCounter timer={this.props.timer} />}
       <View>
         <Button
