@@ -35,7 +35,7 @@ export default class TimerPicker extends React.Component {
               <Picker.Item label="25" value= "25" />
               <Picker.Item label="20" value= "20" />
               <Picker.Item label="15" value= "15" />
-              <Picker.Item label="10" value= "1" />
+              <Picker.Item label="10" value= "10" />
             </Picker>
             <Picker
               selectedValue={this.state.rest}

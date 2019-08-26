@@ -1,57 +1,78 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, Vibration } from 'react-native';
 import { Constants } from 'expo';
 import ClockComponent from './ClockComponent'
+import RestCounter from './RestCounter'
+
 
 
 export default class Counter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0,
-      countSeconds: 59,
-      countMinutes: this.props.timer-1,
+      count: this.props.timer*60,
+      countSeconds: 0,
+      countMinutes: this.props.timer,
       tomatoes: this.props.tomatoes,
-      test: 5,
+      timerDone: false,
     };
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.increment, 1000);
-  }
+      this.interval = setInterval(this.increment, 1000)
+}
+
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
+  endTimer() {
+    this.setState({
+      timerDone: true,
+    })
+    this.props.updateTomatoe();
+    Vibration.vibrate();
+    console.log(this.state.timerDone)
+    this.componentWillUnmount();
+  }
+
   increment = () => {
-    console.log(this.state.tomatoes)
-    if (this.props.onStop === false){
+    if (this.state.count === 0){
+      this.endTimer();
+    }
+
+    if (!this.props.onStop && !this.state.timerDone) {
       this.setState({
-        count: this.state.count +1,
+        count: this.state.count - 1,
         countSeconds: this.state.countSeconds === 0 ? 59 : this.state.countSeconds - 1,
         countMinutes:
-          this.state.countSeconds === 0
+          this.state.count % 60 === 0
             ? this.state.countMinutes - 1
             : this.state.countMinutes,
-        tomatoes:
-          this.state.countMinutes === 0
-            ? this.state.tomatoes + 1
-            : this.state.tomatoes,
       });
-    }
-  };
-
-  vibrate = () => {
-
   }
+}
+
+updateTimerDone = (newValue) => {
+  this.setState({
+    timerDone: newValue,
+  })
+}
 
   render() {
     return (
+
       <View>
-      <Text style={styles.counter}>
+        {this.state.timerDone &&
+            <RestCounter timerDone={this.state.timerDone}
+                          onStop={this.props.onStop}
+                          rest={this.props.rest}
+                          updateTimerDone={this.updateTimerDone}/>}
+      {!this.state.timerDone &&
+            <Text style={styles.counter}>
         {this.state.countMinutes}:{this.state.countSeconds}
-      </Text>
+      </Text>}
       </View>
     );
   }

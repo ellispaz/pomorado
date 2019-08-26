@@ -68,7 +68,7 @@ render() {
         updateRest={this.updateRest} />}
     </View>
     <View style={styles.tomatoes}>
-      {this.state.showTimer && <Text>Number of Tomatoes:{this.state.tomatoes}</Text>}
+      {this.state.showTimer && <Text style={{ justifyContent: 'center', alignItems: 'center', }}>Number of Tomatoes:{this.state.tomatoes}</Text>}
     </View>
     </View>
     );
@@ -87,6 +87,8 @@ const styles = StyleSheet.create({
    },
   tomatoes: {
     position: 'absolute',
-    bottom: 0,
+    bottom: -40,
+    left: 0,
+    right: 0,
   }
 })
